@@ -1,5 +1,4 @@
 name: New Relic Infrastructure Setup
-
 on:
   push:
     branches:
