@@ -14,9 +14,7 @@ jobs:
 
       - name: Install New Relic Infrastructure Agent
         run: |
-          cd ..
-          cd ..
-          ssh -i "rudra-key.pem" ubuntu@ec2-54-198-180-178.compute-1.amazonaws.com
+          ssh -i "../rudra-key.pem" ubuntu@ec2-54-198-180-178.compute-1.amazonaws.com
           sudo apt-get update
           sudo apt-get install -y curl
           curl -s https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg | sudo apt-key add -
