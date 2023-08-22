@@ -15,7 +15,7 @@ jobs:
 
       - name: Install New Relic Infrastructure Agent
         run: |
-          ssh -i "rudra-key.pem" ubuntu@i-08c826a1fe02bd0c9
+          ssh -i "rudra-key.pem" ubuntu@ip-172-31-1-45
       - name: Install New Relic Infrastructure Agent
         run: |
           sudo apt-get update
