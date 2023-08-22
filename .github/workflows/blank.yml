@@ -14,7 +14,18 @@ jobs:
 
       - name: Install New Relic Infrastructure Agent
         run: |
+          cd ..
+          cd ..
           ssh -i "rudra-key.pem" ubuntu@ec2-54-198-180-178.compute-1.amazonaws.com
+          sudo apt-get update
+          sudo apt-get install -y curl
+          curl -s https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg | sudo apt-key add -
+          printf "deb [arch=amd64] https://download.newrelic.com/infrastructure_agent/linux/apt $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/newrelic-infra.list
+          sudo apt-get update
+          sudo apt-get install newrelic-infra -y
+          sudo sed -i 's/license_key:.*/license_key: ${{ secrets.NEW_RELIC_LICENSE_KEY }}/' /etc/main.yml
+          sudo systemctl start newrelic-infra
+          sudo systemctl enable newrelic-infra
         env:
           NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
 
