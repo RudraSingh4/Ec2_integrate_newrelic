@@ -1,0 +1,21 @@
+name: New Relic Infrastructure Setup
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup_infra:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install New Relic Infrastructure Agent
+        run: |
+          ssh -i "rudra-key.pem" ubuntu@ec2-54-198-180-178.compute-1.amazonaws.com
+        env:
+          NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
+
